@@ -52,22 +52,30 @@ export default {
           loginApi.login(this.form.name, this.form.pass)
             .then(res => {
                 //在接口里获取code的值200
+                console.log(res)
               const code = res.data.data.code;
+              // consoloe.log(code);
               if (code == 200) {
                   //获取token
                 const token = res.data.data.data.token;
+                console.log(token)
                 //把获取的token存储在本地
                 localStorage.setItem("ht_token", token);
                 //获取用户信息
                 loginApi.getUserInfo().then(res => {
+                  console.log(res);
                     //获取用户信息code值200  resp.code
                   const resp = res.data.data;
-                //   console.log(resp)
+                  console.log(resp)
                   if (resp.code == 200) {
                       //把获取到的用户信息保存到本地
                     localStorage.setItem("ht_info", JSON.stringify(resp.data));
                     //  在push到主页面   跳转到主页面
-                    this.$router.push("/layout");
+                    this.$router.push("/");
+                    this.$message({
+                      message: "登录成功",
+                      type: "success"
+                    });
                   } else {
                     this.$message({
                       message: "登录失败",
@@ -111,13 +119,13 @@ export default {
 .form {
   padding: 30px;
   width: 30%;
-  height: 33%;
+  height: 30%;
   position: absolute;
   left: 35%;
   top: 30%;
-  background: rgba(255, 255, 255, 0.4);
+  background: rgba(255, 255, 255, 0.2);
   //   border: 1px solid #000;
-  h3 {
+  h2 {
     text-align: center;
     padding-bottom: 15px;
   }

@@ -8,7 +8,7 @@ export default {
     //   登录接口
     login(){
         return request({
-            url:"/user/login",
+            url:"user/login",
             method:"post",
             data:{
                 username:"name",
@@ -17,7 +17,7 @@ export default {
     },
     getUserInfo(){
         return request({
-            url:"/user/info"
+            url:"user/info"
         })
     }
 }
