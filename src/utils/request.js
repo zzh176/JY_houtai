@@ -1,12 +1,13 @@
 import axios from 'axios';
 import { Loading } from 'element-ui';
+import router from "../router/index"
 const request = axios.create({
     //设置公共路径
     // baseURL:'http://120.53.31.103:84/api',
     baseURL:process.env.VUE_APP_BASE_API,
     timeout:5000  //设置请求时间是否超时d 
 });
-
+//封装loading加载
 const loading = {
   loadingInstance : null,
   open(){
@@ -34,7 +35,7 @@ request.interceptors.request.use(function (config){
 
     loading.open();
     const token = localStorage.getItem("ht_token")?localStorage.getItem("ht_token"):"";
-    config.headers.Authorization = token;
+    config.headers.Authorization ="Bearer" + token;
     return config;
 },function (error){
     loading.close();
@@ -46,6 +47,13 @@ request.interceptors.response.use(function (response) {
     console.log("相应拦截器")
     //关闭loading加载
     loading.close();
+
+
+    if(response.data.code == "202"){
+      localStorage.removeItem("ht_token");
+      localStorage.removeItem("ht_info");
+      router.push({path:"/login"})
+    }
     return response;
 },function (error){
     //关闭loading加载

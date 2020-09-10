@@ -9,10 +9,41 @@ export default {
         })
     },
     //获取会员列表分页接口
-    getMemberListPage(page,size){
+    getMemberListPage(page,size,searchMap){
         return request({
             url : `/member/list/search/${page}/${size}`,
-            method : "get"
+            method : "POST",
+            data : searchMap
+        })
+    },
+    //会员接口
+    addMember(data){
+        return request({
+            url:"/member",
+            method:"post",
+            data:data,
+        })
+    },
+    //删除会员接口
+    removeMember(id){
+        return request({
+            url:"/member/${id}",
+            method:"delete",
+        })
+    },
+    //查询单条数据接口
+    findMember(id){
+        return request({
+            url : "member/${id}",
+            method : "get",
+        })
+    },
+    //更新某一条会员的数据接口
+    updatadMember(id,data){
+        return request({
+            url : "/member/${id}",
+            method : "put",
+            data:data
         })
     }
-} 
+}

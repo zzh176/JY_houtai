@@ -19,7 +19,7 @@
           placeholder="选择供应商"
         ></el-input>
         <el-table :data="gridData" class="mtk">
-          <el-table-column fixed prop="date" label="序号" width="150"></el-table-column>
+          <el-table-column prop="index" label="序号" width="150"></el-table-column>
           <el-table-column prop="name" label="供应商名称" width="120"></el-table-column>
           <el-table-column prop="province" label="联系人" width="120"></el-table-column>
         </el-table>
@@ -59,7 +59,7 @@ export default {
     return {
       input: "",
       list:"",
-      gridData:[]
+      gridData:"",
     };
   },
   computed: {},
